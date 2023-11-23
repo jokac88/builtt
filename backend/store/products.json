@@ -1,0 +1,104 @@
+{
+  "products": [
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "priceBeforeDiscount": 746,
+      "weight": "750 g",
+      "description": "546",
+      "picture": "kasika"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "naturela-sa-rogacem"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "kokosovo-ulje"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "kikiriki-puter"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "suncokretov-puter"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "priceBeforeDiscount": 746,
+      "weight": "750 g",
+      "picture": "kikiriki-puter"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "kokosov-protein"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "suncokretov-puter"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "weight": "1 l",
+      "picture": "zejtin"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "priceBeforeDiscount": 746,
+      "weight": "750 g",
+      "picture": "laneno-ulje"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "weight": "30 g",
+      "picture": "granumbar-sa-lesnikovim-puterom"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "weight": "1 l",
+      "picture": "zejtin"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "suncokretov-puter"
+    },
+    {
+      "name": "Kikiriki puter",
+      "price": 546,
+      "weight": "30 g",
+      "picture": "granumbar-sa-sumskim-vocem"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "kokosov-protein"
+    },
+    {
+      "name": "Naturela sa Rogačem i Agava Šećerom",
+      "price": 546,
+      "weight": "750 g",
+      "picture": "suncokretov-puter"
+    }
+  ]
+}
