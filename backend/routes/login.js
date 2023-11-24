@@ -2,9 +2,7 @@ const express = require('express');
 const {getCredentials} = require('../data/user');
 const router = express.Router();
 
-router.post('/login', async ({body: {username: usernameTest, password: passwordTest}}, res) => {
-  const username = usernameTest;
-  const password = passwordTest;
+router.post('/login', async ({body: {email: emailRes, password: passwordRes}}, res) => {
   let user = {};
 
   try {
@@ -13,10 +11,12 @@ router.post('/login', async ({body: {username: usernameTest, password: passwordT
     return res.status(401).json({message: 'Login failed.'});
   }
 
-  if (user.username !== username || user.password !== password) {
+  const {email, password} = user;
+
+  if (email !== emailRes || password !== passwordRes) {
     return res.status(422).json({
       message: 'Invalid credentials.',
-      errors: {credentials: 'Invalid username or password entered.'},
+      errors: {credentials: 'Invalid email or password entered.'},
     });
   }
 
