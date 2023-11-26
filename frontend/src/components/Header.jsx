@@ -1,7 +1,11 @@
-import logo from '../../public/logo.svg';
-import cart from '../assets/svg/cart.svg';
+import {useSelector} from 'react-redux';
+import {NavLink} from 'react-router-dom';
+import LogoIcon from './icons/LogoIcon';
+import CartIcon from './icons/CartIcon';
 
 function Header() {
+  const calculatedQuantities = useSelector(state => state.cart.reduce((accumulator, currentValue) => accumulator + currentValue.quantity, 0));
+
   const style = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -13,27 +17,21 @@ function Header() {
 
   return (
       <header className="header" style={style}>
-        <div style={{alignSelf: 'flex-end', paddingBottom: '10px'}}>
-          <img
-              className="header__logo"
-              src={logo}
-              alt={logo}
-          />
-        </div>
-        <div style={{position: 'relative'}}>
-          <img
-              className="header__cart"
-              src={cart}
-              alt={cart}
-          />
+        <NavLink to="/" style={{alignSelf: 'flex-end', paddingBottom: '10px'}}>
+          <div className="header__logo">
+            <LogoIcon/>
+          </div>
+        </NavLink>
+        <NavLink to="/cart" style={{position: 'relative'}}>
+          <CartIcon/>
           <p className="header__count" style={{
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             margin: 0
-          }}>0</p>
-        </div>
+          }}>{calculatedQuantities}</p>
+        </NavLink>
       </header>
   )
 }

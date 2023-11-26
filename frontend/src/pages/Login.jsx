@@ -1,6 +1,5 @@
-import {
-  Form, json, redirect, useActionData, useNavigation,
-} from 'react-router-dom';
+import store from '../../store/index.js';
+import {Form, json, redirect} from 'react-router-dom';
 
 function LoginPage() {
   return (
@@ -43,7 +42,8 @@ export async function action({request}) {
   }
 
   const resData = await response.json();
-  console.log(resData)
+
+  store.dispatch({type: 'AUTHENTICATION'});
   // const { token } = resData;
 
   return redirect('/');

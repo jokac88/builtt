@@ -1,9 +1,11 @@
 import './App.css'
+import store from '../store/index.js';
+import {Provider} from 'react-redux';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Layout from './pages/Root';
-import HomePage, {loader as productsLoader} from './pages/Home';
+import HomePage from './pages/Home';
 import CartPage from './pages/Cart';
-import LoginPage, {action as loginAction } from './pages/Login';
+import LoginPage, {action as loginAction} from './pages/Login';
 import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
@@ -16,8 +18,8 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <HomePage/>,
-            loader: productsLoader
+            element: <HomePage/>
+            // loader: productsLoader
           },
           {
             path: 'cart',
@@ -35,7 +37,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router}/>;
+  return (
+      <Provider store={store}>
+        <RouterProvider router={router}/>
+      </Provider>
+  );
 }
 
 export default App

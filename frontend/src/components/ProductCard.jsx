@@ -1,13 +1,32 @@
-import {useState} from 'react';
-import minus from '../assets/svg/minus.svg';
-import plus from '../assets/svg/plus.svg';
-import cart from '../assets/svg/cart.svg';
+import {useEffect, useState} from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import MinusIcon from './icons/MinusIcon';
+import PlusIcon from './icons/PlusIcon';
+import CartIcon from './icons/CartIcon';
+import {handleQuantityChange} from "../../util/handleQuantityChange.js";
 
 function ProductCard({product}) {
-  const [quantity, setQuantity] = useState(0);
+  const {id, name, price, picture} = product;
+  const cart = useSelector(({cart}) => cart);
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
 
-  const increaseQuantity = () => setQuantity(quantity + 1);
-  const decreaseQuantity = () => setQuantity(quantity - 1);
+  const updateCart = (cart, id) => {
+    const cartProduct = cart.find((product) => product.id === id);
+
+    !cartProduct ? dispatch({type: 'ADD_TO_CART', product: {...product, quantity}}) : dispatch({
+      type: 'UPDATE_CART',
+      product: {...product, quantity}
+    });
+  };
+
+  const areQuantitiesEqual = (product, cart) => {
+    const cartProduct = cart.find(item => item.id === product.id);
+
+    return cartProduct ? cartProduct.quantity === quantity : false;
+  };
+
+  const isDisabled = (!quantity && !cart.some(item => item.id === product.id)) || areQuantitiesEqual(product, cart);
 
   const style = {
     position: 'relative',
@@ -21,7 +40,7 @@ function ProductCard({product}) {
   return (
       <div>
         <div style={style}>
-          <img src={`/img/${product.picture}.png`} alt={product.picture}/>
+          <img src={`/assets/img/${picture}.png`} alt={picture}/>
           <div style={{
             position: 'absolute',
             bottom: '8px',
@@ -38,23 +57,34 @@ function ProductCard({product}) {
               backgroundColor: 'white',
               borderRadius: '100px'
             }}>
-              <button onClick={decreaseQuantity} disabled={!quantity}>
-                <img src={minus} alt={minus}/>
+              <button
+                  onClick={() => setQuantity(quantity - 1)}
+                  className="product-card__button"
+                  disabled={quantity <= 1}>
+                <MinusIcon/>
               </button>
-              <p>{quantity}</p>
-              <button onClick={increaseQuantity}>
-                <img src={plus} alt={plus}/>
+              <input
+                  type="text"
+                  value={quantity}
+                  onChange={(e) => setQuantity(handleQuantityChange(e))}
+                  maxLength={2}
+              />
+              <button onClick={() => setQuantity(quantity + 1)}>
+                <PlusIcon/>
               </button>
             </div>
             <div>
-              <button>
-                <img src={cart} alt={cart}/>
+              <button
+                  onClick={() => updateCart(cart, id)}
+                  disabled={isDisabled}
+              >
+                <CartIcon color="#FFFFFF"/>
               </button>
             </div>
           </div>
         </div>
-        <h1>{product.name}</h1>
-        <h1>{product.price} <sup>RSD</sup></h1>
+        <h1>{name}</h1>
+        <h1>{price} <sup>RSD</sup></h1>
       </div>
   )
 }

@@ -1,40 +1,30 @@
-import { Suspense } from 'react';
-import {
-  Await, defer, json, useLoaderData,
-} from 'react-router-dom';
+import {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../components/Loader';
 import ProductsList from '../components/ProductsList';
-import ErrorPage from './Error';
+import {loadProducts} from "../../api/products.js";
 
 function HomePage() {
-  const { products } = useLoaderData();
+  const products = useSelector(({products}) => products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await loadProducts();
+
+        dispatch({type: 'SET_PRODUCTS', products: response});
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    !products.length && fetchProducts();
+  }, [dispatch]);
 
   return (
-      <Suspense fallback={<Loader />}>
-        <Await resolve={products} errorElement={<ErrorPage />}>
-          {(resolvedPokemon) => <ProductsList productsList={resolvedPokemon} />}
-        </Await>
-      </Suspense>
+      products.length ? <ProductsList productsList={products}/> : <Loader/>
   )
 }
 
 export default HomePage;
-
-const loadProducts = async () => {
-  const baseURL = 'http://localhost:4000/products';
-  const response = await fetch(baseURL);
-
-  if (!response.ok) {
-    throw json({ message: 'Could not fetch details for selected pokemon.' }, { status: 500 });
-  }
-
-  const resData = await response.json();
-
-  return resData.products;
-};
-
-export function loader() {
-  return defer({
-    products: loadProducts(),
-  });
-}
