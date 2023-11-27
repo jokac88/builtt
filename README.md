@@ -2,11 +2,11 @@
 
 ## Installation
 
-##### 1. Navigate to the project directory:
+#### 1. Navigate to the project directory:
 
 `cd backend/`
 
-##### 2. Install dependencies:
+#### 2. Install dependencies:
 
 `pnpm install`
 
@@ -22,15 +22,17 @@ or
 
 `npm start`
 
+#### 2. Open your browser and visit http://localhost:4000/products to view the endpoint.
+
 # Frontend
 
 ## Installation
 
-#### Navigate to the project directory:
+#### 1. Navigate to the project directory:
 
 `cd frontend/`
 
-#### Install dependencies:
+#### 2. Install dependencies:
 
 `pnpm install`
 
