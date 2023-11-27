@@ -47,3 +47,9 @@ or
 `npm run dev`
 
 #### 2. Open your browser and visit http://localhost:3000 to view the app.
+
+#### 3. Login credentials
+
+`email: ivan.jovkovic88@gmail.com`
+
+`password: builtt`
