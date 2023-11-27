@@ -44,6 +44,6 @@ or
 
 #### 1. Start the application:
 
-`npm dev`
+`npm run dev`
 
 #### 2. Open your browser and visit http://localhost:3000 to view the app.
