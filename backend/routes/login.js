@@ -15,12 +15,11 @@ router.post('/login', async ({body: {email: emailRes, password: passwordRes}}, r
 
   if (email !== emailRes || password !== passwordRes) {
     return res.status(422).json({
-      message: 'Invalid credentials.',
-      errors: {credentials: 'Invalid email or password entered.'},
+      credentials: 'Netačna e-mail adresa ili šifra.'
     });
   }
 
-  res.json({message: 'Login successful'})
+  res.json({successful: 'Uspešno si se prijavio.'})
 });
 
 module.exports = router;

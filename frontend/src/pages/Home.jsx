@@ -1,8 +1,10 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import Loader from '../components/Loader';
+import store from '../../store/index.js';
+import {redirect} from 'react-router-dom';
+import Loader from '../components/icons/Loader.jsx';
 import ProductsList from '../components/ProductsList';
-import {loadProducts} from "../../api/products.js";
+import {loadProducts} from '../../api/products.js';
 
 function HomePage() {
   const products = useSelector(({products}) => products);
@@ -23,8 +25,20 @@ function HomePage() {
   }, [dispatch]);
 
   return (
-      products.length ? <ProductsList productsList={products}/> : <Loader/>
+      products.length ? <ProductsList productsList={products}/> :
+          <div className="w-[300px] mx-auto"><Loader color="black"/></div>
   )
 }
 
 export default HomePage;
+
+export function loader() {
+  const currentState = store.getState();
+  const isLogged = currentState.isLogged;
+
+  if (!isLogged) {
+    return redirect('/login');
+  }
+
+  return null;
+}

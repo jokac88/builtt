@@ -7,27 +7,6 @@ const rootReducer = (state = initialValue, action) => {
       ...state,
       products: action.products,
     }),
-    // SET_PRODUCT_QUANTITY: () => ({
-    //   ...state,
-    //   products: state.products.map((product) => product.id === action.id ? {
-    //     ...product,
-    //     quantity: action.quantity
-    //   } : product)
-    // }),
-    // INCREASE_PRODUCT_QUANTITY: () => ({
-    //   ...state,
-    //   products: state.products.map((product) => product.id === action.id ? {
-    //     ...product,
-    //     quantity: product.quantity + 1
-    //   } : product)
-    // }),
-    // DECREASE_PRODUCT_QUANTITY: () => ({
-    //   ...state,
-    //   products: state.products.map((product) => product.id === action.id ? {
-    //     ...product,
-    //     quantity: product.quantity - 1
-    //   } : product)
-    // }),
     ADD_TO_CART: () => ({
       ...state,
       cart: [...state.cart, action.product]

@@ -20,7 +20,7 @@ app.use(productsRoutes);
 
 app.use(({status: errorStatus, message: errorMessage}, req, {status: resStatus}) => {
   const status = errorStatus || 500;
-  const message = errorMessage || 'Something went wrong.';
+  const message = errorMessage || 'Nešto nije u redu.';
 
   resStatus(status).json({message});
 });

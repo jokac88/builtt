@@ -1,8 +1,9 @@
 import {useDispatch} from 'react-redux';
 import MinusIcon from './icons/MinusIcon';
 import PlusIcon from './icons/PlusIcon';
-import {useEffect, useState} from "react";
-import {handleQuantityChange} from "../../util/handleQuantityChange.js";
+import {useState} from 'react';
+import {handleQuantityChange} from '../../util/handleQuantityChange.js';
+import {priceFormatter} from "../../util/priceFormatter.js";
 
 function CartCard({product}) {
   const {id, name, description, weight, price, discountPrice, quantity, picture} = product;
@@ -19,84 +20,68 @@ function CartCard({product}) {
     dispatch({type: 'UPDATE_CART', product: {...product, quantity: inputQuantity + 1}});
   };
 
-  const removeFromCart = id => dispatch({type: 'REMOVE_FROM_CART', id});
+  const removeFromCart = id => {
+    const confirmDelete = window.confirm('Da li si siguran/na?');
 
-  // const increaseQuantity = id => dispatch({type: 'INCREASE_PRODUCT_QUANTITY', id});
-
-  // const decreaseQuantity = id => dispatch({type: 'DECREASE_PRODUCT_QUANTITY', id});
-
-  // const updateCart = (cart, id) => {
-  //   const carProduct = cart.find((product) => product.id === id);
-  //
-  //   !carProduct ? dispatch({type: 'ADD_TO_CART', product}) : dispatch({type: 'UPDATE_CART', product});
-  // };
-  // const areQuantitiesEqual = (product, cart) => {
-  //   const cartProduct = cart.find(item => item.id === product.id);
-  //
-  //   return cartProduct ? cartProduct.quantity === product.quantity : false;
-  // };
-  //
-  // const isDisabled = (!quantity && !cart.some(item => item.id === product.id)) || areQuantitiesEqual(product, cart);
-
-  const style = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    columnGap: '15px',
-    backgroundColor: 'var(--light-grey)',
-    height: '284px'
+    if (confirmDelete) {
+      dispatch({type: 'REMOVE_FROM_CART', id});
+    }
   };
 
   return (
-      <section>
-        <div style={style}>
-          <div style={{display: 'flex'}}>
-            <img src={`/assets/img/${picture}.png`} alt={picture}/>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between'
-            }}>
+      <div>
+        <div className="flex flex-col md:flex-row md:justify-between gap-y-[15px] md:gap-x-[35px]">
+          <div className="flex flex-1 gap-x-[15px] md:gap-x-[35px]">
+            <div className="flex items-center basis-[180px] md:basis-[143px] md:min-h-[143px] bg-[#F0F0F0]">
+              <img src={`/assets/img/${picture}.png`} alt={picture}/>
+            </div>
+            <div className="flex flex-col justify-between gap-y-[15px]">
               <div>
-                <h1>{name}</h1>
-                <h1>{weight}</h1>
-                {description && <h1>{description}</h1>}
+                <h2 className="font-bold text-[18px] leading-[24px]">{name}</h2>
+                <p className="mb-[8px] text-[15px] leading-[23px]">{weight}</p>
+                {description && <p className="text-[13px] text-[#545454] leading-[15px]">{priceFormatter(description)} RSD po kom.</p>}
               </div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                columnGap: '15px',
-                padding: '10px 15px',
-                backgroundColor: 'white',
-                borderRadius: '100px'
-              }}>
+              <div className="flex items-center gap-x-[25px]">
+                <div
+                    className="flex items-center gap-x-[12px] w-[105px] h-[35px] px-[12px] border-solid border border-black rounded-[18px]">
+                  <button
+                      onClick={decreaseQuantity}
+                      className="disabled:cursor-not-allowed"
+                      disabled={inputQuantity <= 1}
+                  >
+                    <MinusIcon
+                        className={`transition-[fill] duration-[0.5s] ${quantity <= 1 ? 'fill-[#CCCCCC]' : 'fill-[#000000]'}`}/>
+                  </button>
+                  <input
+                      type="text"
+                      className="w-full tracking-[-0.16px] focus:border-black focus-visible:outline-none"
+                      value={inputQuantity}
+                      onChange={(e) => setInputQuantity(handleQuantityChange(e))}
+                      maxLength={2}
+                  />
+                  <button onClick={increaseQuantity}>
+                    <PlusIcon/>
+                  </button>
+                </div>
                 <button
-                    onClick={decreaseQuantity}
-                    className="product-card__button"
-                    disabled={inputQuantity <= 1}>
-                  <MinusIcon/>
-                </button>
-                <input
-                    type="text"
-                    value={inputQuantity}
-                    onChange={(e) => setInputQuantity(handleQuantityChange(e))}
-                    maxLength={2}
-                />
-                <button onClick={increaseQuantity}>
-                  <PlusIcon/>
-                </button>
-                <button onClick={() => removeFromCart(id)}>
+                    className="border-b-[1.5px] border-black transition-all duration-[0.5s]  hover:text-neutral-800 hover:border-neutral-800"
+                    onClick={() => removeFromCart(id)}>
                   Ukloni
                 </button>
               </div>
             </div>
           </div>
           <div>
-            <h1>{(discountPrice || price) * inputQuantity} <sup>RSD</sup></h1>
-            {discountPrice && <h1>{price * inputQuantity} <sup>RSD</sup></h1>}
+            <p className="mb-[7px] text-[24px] leading-[33px] tracking-[-0.24px]">
+              {priceFormatter((discountPrice || price) * inputQuantity)} <sup
+                className="top-[-8px] mt-[15px] text-[13px] leading-[16px] tracking-[0.52px]">RSD</sup></p>
+            {discountPrice && <p className="text-[#C94D00] text-[16px] leading-[18px] tracking-[-0.16px]"><span
+                className=" line-through">{priceFormatter(price * inputQuantity)}</span> <sup
+                className="text-[11px] leading-[16px] tracking-[0.44px]">RSD</sup></p>}
           </div>
         </div>
-        <hr/>
-      </section>
+        <hr className="my-[25px]"/>
+      </div>
   )
 }
 
