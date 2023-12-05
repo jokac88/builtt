@@ -1,0 +1,13 @@
+{
+  "name": "builtt",
+  "version": "1.0.0",
+  "description": "full stack app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
