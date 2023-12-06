@@ -37,6 +37,9 @@ function LoginPage() {
             <label className="text-[12px] leading-[12px] tracking-[0.24px]" htmlFor="email">
               E-mail adresa<span className="text-red-500">*</span>
             </label>
+            <span className="text-[12px] leading-[12px] tracking-[0.24px]">
+              ivan.jovkovic88@gmail.com
+            </span>
             <input
                 className={`w-full py-[5px] border-b ${emailBorderColor} leading-[28px] transition-[border-color] duration-[0.5s] hover:border-black focus:border-black focus-visible:outline-none ${placeholderColor} placeholder:transition-[color] placeholder:duration-[0.5s]`}
                 type="text"
@@ -56,6 +59,7 @@ function LoginPage() {
             <label className="text-[12px] leading-[12px] tracking-[0.24px]" htmlFor="password">
               Šifra<span className="text-red-500">*</span>
             </label>
+            <span className="text-[12px] leading-[12px] tracking-[0.24px]">builtt</span>
             <div className="relative">
               <input
                   className={`w-full py-[5px] pr-[40px] border-b ${passwordBorderColor} leading-[28px] transition-[border-color] duration-[0.5s] hover:border-black focus:border-black focus-visible:outline-none ${placeholderColor} placeholder:transition-[color] placeholder:duration-[0.5s]`}
