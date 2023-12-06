@@ -109,7 +109,7 @@ export async function action({request}) {
     };
   }
 
-  const baseURL = 'http://localhost:4000/login';
+  const baseURL = 'https://builtt-e10136fe5c38.herokuapp.com/login';
 
   try {
     const response = await fetch(baseURL, {

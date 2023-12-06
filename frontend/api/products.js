@@ -1,7 +1,7 @@
 import {json} from 'react-router-dom';
 
 export const loadProducts = async () => {
-  const baseURL = 'http://localhost:4000/products';
+  const baseURL = 'https://builtt-e10136fe5c38.herokuapp.com/products';
   const response = await fetch(baseURL);
 
   if (!response.ok) {

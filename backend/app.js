@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 
 const loginRoutes = require('./routes/login');
@@ -18,11 +19,17 @@ app.use((req, res, next) => {
 app.use(loginRoutes);
 app.use(productsRoutes);
 
-app.use(({status: errorStatus, message: errorMessage}, req, {status: resStatus}) => {
+app.use(({status: errorStatus, message: errorMessage}, req, {status: resStatus}, next) => {
   const status = errorStatus || 500;
   const message = errorMessage || 'Nešto nije u redu.';
 
   resStatus.status(status).json({message});
+});
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 app.listen(port, () => {

@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "description": "full stack app",
   "main": "index.js",
-  "engines": {
-    "node": "20.9.0",
-    "npm": "10.1.0"
-  },
   "scripts": {
-    "start": "node backend/app.js",
-    "build": "cd frontend && vite build",
-    "heroku-postbuild": "npm i --prefix frontend && npm run build --prefix frontend"
+    "start": "cd backend && npm run start",
+    "build": "cd frontend && npm i && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "20.9.0",
+    "npm": "10.2.4"
   },
   "keywords": [],
   "author": "",
